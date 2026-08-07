@@ -12,7 +12,10 @@ if (!process.env.MONGODB_URI) {
 
 const seedData = async () => {
   try {
-    const mongoUri = process.env.MONGODB_URI || 'mongodb+srv://23b01a45a9_db_user:Aasri%40123@cluster0.71ntzqf.mongodb.net/parking_management?retryWrites=true&w=majority&appName=Cluster0';
+    const mongoUri = process.env.MONGODB_URI;
+    if (!mongoUri) {
+      throw new Error('MONGODB_URI environment variable is missing. Please define it in backend/.env file.');
+    }
     await mongoose.connect(mongoUri);
     console.log('MongoDB connected for seeding...');
 
