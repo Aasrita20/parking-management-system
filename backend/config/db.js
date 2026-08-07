@@ -2,13 +2,14 @@ const mongoose = require('mongoose');
 
 const connectDB = async () => {
   try {
-    const conn = await mongoose.connect(process.env.MONGODB_URI, {
-      // mongoose 6+ defaults are optimal
-    });
+    if (!process.env.MONGODB_URI) {
+      console.warn('⚠️ MONGODB_URI environment variable is missing on cloud server.');
+      return;
+    }
+    const conn = await mongoose.connect(process.env.MONGODB_URI);
     console.log(`MongoDB Connected: ${conn.connection.host}`);
   } catch (error) {
     console.error(`MongoDB Connection Error: ${error.message}`);
-    process.exit(1);
   }
 };
 
