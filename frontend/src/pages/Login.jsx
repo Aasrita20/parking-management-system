@@ -116,7 +116,7 @@ export default function Login() {
             className="w-full py-3 px-4 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-bold text-sm shadow-lg shadow-blue-600/30 transition-all flex items-center justify-center gap-2 group disabled:opacity-50"
           >
             {loading ? (
-              <span>Signing in...</span>
+              <span>Connecting to API... (Please wait)</span>
             ) : (
               <>
                 <span>Sign In to Dashboard</span>
