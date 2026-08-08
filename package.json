@@ -4,8 +4,8 @@
   "description": "Full Stack Parking Management System Root Package",
   "main": "backend/server.js",
   "scripts": {
+    "build": "cd frontend && npm install && npm run build",
     "start": "cd backend && node server.js",
-    "build": "cd backend && npm install",
     "seed": "cd backend && node utils/seeder.js"
   }
 }
