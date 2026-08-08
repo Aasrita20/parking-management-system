@@ -8,8 +8,22 @@ const errorHandler = require('./middleware/errorHandler');
 // Load environment variables
 dotenv.config();
 
-// Connect to Database
-connectDB();
+// Connect to Database & Auto-seed if empty
+connectDB().then(async (conn) => {
+  if (conn) {
+    try {
+      const User = require('./models/User');
+      const count = await User.countDocuments();
+      if (count === 0) {
+        console.log('Database empty on startup. Auto-populating initial parking lots and accounts...');
+        const seedData = require('./utils/seeder');
+        await seedData();
+      }
+    } catch (err) {
+      console.error('Auto-seed check failed:', err.message);
+    }
+  }
+});
 
 const app = express();
 
